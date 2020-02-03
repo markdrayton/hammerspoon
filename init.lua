@@ -18,6 +18,9 @@ hs.alert.defaultStyle.radius = 10
 -- Disable window size/location animations
 hs.window.animationDuration = 0
 
+-- Open console
+hs.hotkey.bind(mash, "Y", nil, hs.toggleConsole)
+
 -- Window layout
 local laptop = "Color LCD"
 local dell = "DELL U2713HM"
