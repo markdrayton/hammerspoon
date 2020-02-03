@@ -43,6 +43,39 @@ screenWatcher = hs.screen.watcher.new(applyLayout)
 screenWatcher:start()
 hs.hotkey.bind(mash, "L", nil, applyLayout)
 
+-- Chrome history
+hs.hotkey.bind(mash, "C", nil, function()
+  local iterm = hs.application.get("iTerm2")
+  local originalWindows = {}
+  if iterm then
+    originalWindows = iterm:visibleWindows()
+  end
+  -- make a new window if iTerm isn't running or has no windows
+  hs.application.launchOrFocus("/Applications/iTerm.app/Contents/MacOS/iTerm2")
+  hs.timer.waitUntil(
+    function()
+      return hs.window.focusedWindow():application():name() == "iTerm2"
+    end,
+    function()
+      if #originalWindows > 0 then
+        -- already had some windows open so make a new one
+        hs.eventtap.keyStroke({"cmd"}, "N")
+      end
+      -- leave time to open the window
+      hs.timer.doAfter(0.05, function()
+        local win = hs.window:focusedWindow()
+        if win:screen():name() == dell then
+          win:move({0.15, 0.15, 0.7, 0.7})
+        else
+          win:maximize()
+        end
+        hs.eventtap.keyStrokes("unset HISTFILE; ch; exit\n")
+      end)
+    end,
+    0.05
+  )
+end)
+
 -- Point DNS to home pihole
 lastNetwork = hs.wifi.currentNetwork()
 
