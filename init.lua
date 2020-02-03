@@ -33,12 +33,15 @@ local layouts = {
   }
 }
 
-screenWatcher = hs.screen.watcher.new(function()
+applyLayout = function()
   local screens = hs.screen.allScreens()
   logger.d("Found " .. #screens .. " screens")
   hs.layout.apply(layouts[#screens])
-end)
+end
+
+screenWatcher = hs.screen.watcher.new(applyLayout)
 screenWatcher:start()
+hs.hotkey.bind(mash, "L", nil, applyLayout)
 
 -- Point DNS to home pihole
 lastNetwork = hs.wifi.currentNetwork()
