@@ -79,6 +79,17 @@ hs.hotkey.bind(mash, "C", nil, function()
   )
 end)
 
+local wm = hs.webview.windowMasks
+Install:andUse("DeepLTranslate", {
+  disable = false,
+  config = {
+    popup_style = wm.utility|wm.HUD|wm.titled|wm.closable|wm.resizable,
+  },
+  hotkeys = {
+    translate = { mash, "E" },
+  }
+})
+
 -- Point DNS to home pihole
 lastNetwork = hs.wifi.currentNetwork()
 
