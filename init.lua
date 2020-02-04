@@ -53,7 +53,7 @@ screenWatcher:start()
 hs.hotkey.bind(mash, "L", nil, function() applyLayout(true) end)
 
 -- Chrome history
-hs.hotkey.bind(mash, "C", nil, function()
+hs.hotkey.bind(mash, "H", nil, function()
   local iterm = hs.application.get("iTerm2")
   local originalWindows = {}
   if iterm then
