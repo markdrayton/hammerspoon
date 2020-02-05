@@ -36,21 +36,10 @@ local layouts = {
   }
 }
 
-local screens = hs.screen.allScreens()
-applyLayout = function(force)
-  local newScreens = hs.screen.allScreens()
-  logger.d(#newScreens .. " screens found")
-  -- Unhiding the dock triggers the screen watcher so only do something if the
-  -- number of screens changes
-  if #newScreens ~= #screens or force then
-    hs.layout.apply(layouts[#screens])
-  end
-  screens = newScreens
-end
-
-screenWatcher = hs.screen.watcher.new(applyLayout)
-screenWatcher:start()
-hs.hotkey.bind(mash, "L", nil, function() applyLayout(true) end)
+hs.hotkey.bind(mash, "L", nil, function()
+  local screens = hs.screen.allScreens()
+  hs.layout.apply(layouts[#screens])
+end)
 
 -- Chrome history
 hs.hotkey.bind(mash, "H", nil, function()
