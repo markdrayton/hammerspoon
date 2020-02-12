@@ -86,6 +86,14 @@ Install:andUse("DeepLTranslate", {
   }
 })
 
+-- Toggle caffeine
+Install:andUse("Caffeine", {
+  start = true,
+  hotkeys = {
+    toggle = { mash, "C" }
+  }
+})
+
 -- Point DNS to home pihole
 lastNetwork = hs.wifi.currentNetwork()
 
