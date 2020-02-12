@@ -74,6 +74,7 @@ hs.hotkey.bind(mash, "H", nil, function()
   )
 end)
 
+-- DeepL translate
 local wm = hs.webview.windowMasks
 Install:andUse("DeepLTranslate", {
   disable = false,
