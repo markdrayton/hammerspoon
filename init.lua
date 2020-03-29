@@ -94,30 +94,6 @@ Install:andUse("Caffeine", {
   }
 })
 
--- Point DNS to home pihole
-lastNetwork = hs.wifi.currentNetwork()
-
-function setResolver(resolver)
-  _, status = hs.execute("networksetup -setdnsservers Wi-Fi " .. resolver)
-  if status == nil then
-    logger.e("networksetup failed")
-  end
-end
-
-function networkChanged()
-  local newNetwork = hs.wifi.currentNetwork()
-  if newNetwork == homeNetwork and lastNetwork ~= homeNetwork then
-    logger.d("Pointing DNS resolver to " .. pihole)
-    setResolver(pihole)
-  elseif newNetwork ~= homeNetwork and lastNetwork == homeNetwork then
-    logger.d("Clearing DNS resolvers")
-    setResolver("Empty")
-  end
-  lastNetwork = newNetwork
-end
-wifiWatcher = hs.wifi.watcher.new(networkChanged)
-wifiWatcher:start()
-
 -- Automatically reload config
 function reloadConfig(files)
   local doReload = false
