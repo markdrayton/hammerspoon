@@ -25,14 +25,28 @@ hs.hotkey.bind(mash, "Y", nil, hs.toggleConsole)
 local laptop = "Color LCD"
 local dell = "DELL U2713HM"
 
+function yt(app, match)
+  local wins = hs.application.get(app):visibleWindows()
+  local r = {}
+  for _, w in ipairs(wins) do
+    if not not string.match(w:title(), "YouTube - ") == match then
+      r[#r + 1] = w
+    end
+  end
+  return r
+end
+
 local layouts = {
   [1] = { -- one screen
     {"Google Chrome", nil, laptop, hs.layout.maximized, nil, nil},
     {"iTerm2", nil, laptop, hs.layout.maximized, nil, nil}
   },
   [2] = { -- two screens
-    {"Google Chrome", nil, dell, hs.layout.left50, nil, nil},
-    {"iTerm2", nil, dell, hs.layout.right50, nil, nil}
+    {"Google Chrome", function(app) return yt(app, false) end, dell, hs.layout.left50, nil, nil},
+    {"iTerm2", nil, dell, hs.layout.right50, nil, nil},
+    {"Google Chrome", function(app) return yt(app, true) end, laptop, hs.layout.maximized, nil, nil},
+    {"Signal", nil, laptop, hs.geometry.rect(0.2, 0.15, 0.6, 0.7), nil, nil},
+    {"Music", nil, laptop, hs.layout.maximized, nil, nil},
   }
 }
 
