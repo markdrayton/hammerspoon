@@ -39,10 +39,13 @@ end
 local layouts = {
   [1] = { -- one screen
     {"Google Chrome", nil, laptop, hs.layout.maximized, nil, nil},
+    {"Firefox", nil, laptop, hs.layout.maximized, nil, nil},
     {"iTerm2", nil, laptop, hs.layout.maximized, nil, nil}
   },
   [2] = { -- two screens
+    -- TODO: add Firefox YT detection
     {"Google Chrome", function(app) return yt(app, false) end, dell, hs.layout.left50, nil, nil},
+    {"Firefox", nil, dell, hs.layout.left50, nil, nil},
     {"iTerm2", nil, dell, hs.layout.right50, nil, nil},
     {"Google Chrome", function(app) return yt(app, true) end, laptop, hs.layout.maximized, nil, nil},
     {"Signal", nil, laptop, hs.geometry.rect(0.2, 0.15, 0.6, 0.7), nil, nil},
@@ -81,7 +84,8 @@ hs.hotkey.bind(mash, "H", nil, function()
         else
           win:maximize()
         end
-        hs.eventtap.keyStrokes("unset HISTFILE; ch; exit\n")
+        hs.eventtap.keyStrokes(" unset HISTFILE\n")
+        hs.eventtap.keyStrokes("echo -ne \"\\033]0;\"Browser history\"\\007\"; fh; exit\n")
       end)
     end,
     0.05
