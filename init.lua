@@ -28,14 +28,10 @@ local dell = "DELL U2713HM"
 function yt(app, match)
   local r = {}
   if app then
-    local comp = (app == "Google Chrome") and
-      function(title)
-        -- not not to cast to bool
-        return not not string.match(title, "YouTube - ")
-      end or
-      function(title)
-        return title == "YouTube"
-      end
+    local comp = function(title)
+      -- not not to cast to bool
+      return not not string.match(title, "%f[%a]YouTube%f[%A]")
+    end
     local wins = hs.application.get(app):visibleWindows()
     for _, w in ipairs(wins) do
       if comp(w:title()) == match then
@@ -46,6 +42,14 @@ function yt(app, match)
   return r
 end
 
+function is_yt(app)
+  return yt(app, true)
+end
+
+function is_not_yt(app)
+  return yt(app, false)
+end
+
 local layouts = {
   [1] = { -- one screen
     {"Google Chrome", nil, laptop, hs.layout.maximized, nil, nil},
@@ -53,11 +57,11 @@ local layouts = {
     {"iTerm2", nil, laptop, hs.layout.maximized, nil, nil}
   },
   [2] = { -- two screens
-    {"Google Chrome", function(app) return yt(app, false) end, dell, hs.layout.left50, nil, nil},
-    {"Firefox", function(app) return yt(app, false) end, dell, hs.layout.left50, nil, nil},
+    {"Google Chrome", is_not_yt, dell, hs.layout.left50, nil, nil},
+    {"Firefox", is_not_yt, dell, hs.layout.left50, nil, nil},
     {"iTerm2", nil, dell, hs.layout.right50, nil, nil},
-    {"Google Chrome", function(app) return yt(app, true) end, laptop, hs.layout.maximized, nil, nil},
-    {"Firefox", "YouTube", laptop, hs.layout.maximized, nil, nil},
+    {"Google Chrome", is_yt, laptop, hs.layout.maximized, nil, nil},
+    {"Firefox", is_yt, laptop, hs.layout.maximized, nil, nil},
     {"Signal", nil, laptop, hs.geometry.rect(0.2, 0.15, 0.6, 0.7), nil, nil},
     {"Music", nil, laptop, hs.layout.maximized, nil, nil},
   }
