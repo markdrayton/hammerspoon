@@ -91,7 +91,7 @@ hs.hotkey.bind(mash, "L", nil, function()
   hs.layout.apply(layouts[#screens])
 end)
 
--- Chrome history
+-- Browser history
 hs.hotkey.bind(mash, "H", nil, function()
   local iterm = hs.application.get("iTerm2")
   local originalWindows = {}
