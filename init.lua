@@ -54,7 +54,8 @@ local layouts = {
   [1] = { -- one screen
     {"Google Chrome", nil, laptop, hs.layout.maximized, nil, nil},
     {"Firefox", nil, laptop, hs.layout.maximized, nil, nil},
-    {"iTerm2", nil, laptop, hs.layout.maximized, nil, nil}
+    {"iTerm2", nil, laptop, hs.layout.maximized, nil, nil},
+    {"Slack", nil, laptop, hs.layout.maximized, nil, nil},
   },
   [2] = { -- two screens
     {"Google Chrome", is_not_yt, dell, hs.layout.left50, nil, nil},
@@ -64,6 +65,7 @@ local layouts = {
     {"Firefox", is_yt, laptop, hs.layout.maximized, nil, nil},
     {"Signal", nil, laptop, hs.geometry.rect(0.2, 0.15, 0.6, 0.7), nil, nil},
     {"Music", nil, laptop, hs.layout.maximized, nil, nil},
+    {"Slack", nil, laptop, hs.layout.maximized, nil, nil},
   }
 }
 
