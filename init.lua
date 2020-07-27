@@ -5,7 +5,15 @@ hs.logger.defaultLogLevel = "debug"
 logger = hs.logger.new("main")
 
 -- Local config variables
-dofile("config.lua")
+function localconfig()
+  local f, err = loadfile("config.lua")
+  if err then
+    print("-- No config.lua found.")
+  else
+    f()
+  end
+end
+localconfig()
 
 -- Spoons
 hs.loadSpoon("SpoonInstall")
