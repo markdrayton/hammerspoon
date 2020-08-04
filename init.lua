@@ -4,6 +4,13 @@ mash = {"ctrl", "alt", "cmd"}
 hs.logger.defaultLogLevel = "debug"
 logger = hs.logger.new("main")
 
+-- I can never remember how to print a table
+function walk(table)
+  for k, v in pairs(table) do
+    print(k, v)
+  end
+end
+
 -- Local config variables
 function localconfig()
   local f, err = loadfile("config.lua")
@@ -64,6 +71,7 @@ local layouts = {
     {"Firefox", nil, laptop, hs.layout.maximized, nil, nil},
     {"iTerm2", nil, laptop, hs.layout.maximized, nil, nil},
     {"Slack", nil, laptop, hs.layout.maximized, nil, nil},
+    {"zoom.us", "Zoom Meeting", laptop, hs.layout.maximized, nil, nil},
   },
   [2] = { -- two screens
     {"Google Chrome", is_not_yt, dell, hs.layout.left50, nil, nil},
@@ -74,6 +82,7 @@ local layouts = {
     {"Signal", nil, laptop, hs.geometry.rect(0.2, 0.15, 0.6, 0.7), nil, nil},
     {"Music", nil, laptop, hs.layout.maximized, nil, nil},
     {"Slack", nil, laptop, hs.layout.maximized, nil, nil},
+    {"zoom.us", "Zoom Meeting", laptop, hs.layout.maximized, nil, nil},
   }
 }
 
