@@ -40,12 +40,15 @@ hs.hotkey.bind(mash, "Y", nil, hs.toggleConsole)
 local laptop = "Color LCD"
 local dell = "DELL U2713HM"
 
-function yt(app, match)
+function video(app, match)
   local r = {}
   if app then
     local comp = function(title)
       -- not not to cast to bool
-      return not not string.match(title, "%f[%a]YouTube%f[%A]")
+      return not not (
+        string.match(title, "%f[%a]YouTube%f[%A]")
+        or string.match(title, "%f[%a]ITV Hub%f[%A]")
+      )
     end
     local wins = hs.application.get(app):visibleWindows()
     for _, w in ipairs(wins) do
@@ -57,12 +60,12 @@ function yt(app, match)
   return r
 end
 
-function is_yt(app)
-  return yt(app, true)
+function is_video(app)
+  return video(app, true)
 end
 
-function is_not_yt(app)
-  return yt(app, false)
+function is_not_video(app)
+  return video(app, false)
 end
 
 local layouts = {
@@ -74,11 +77,11 @@ local layouts = {
     {"zoom.us", "Zoom Meeting", laptop, hs.layout.maximized, nil, nil},
   },
   [2] = { -- two screens
-    {"Google Chrome", is_not_yt, dell, hs.layout.left50, nil, nil},
-    {"Firefox", is_not_yt, dell, hs.layout.left50, nil, nil},
+    {"Google Chrome", is_not_video, dell, hs.layout.left50, nil, nil},
+    {"Firefox", is_not_video, dell, hs.layout.left50, nil, nil},
     {"iTerm2", nil, dell, hs.layout.right50, nil, nil},
-    {"Google Chrome", is_yt, laptop, hs.layout.maximized, nil, nil},
-    {"Firefox", is_yt, laptop, hs.layout.maximized, nil, nil},
+    {"Google Chrome", is_video, laptop, hs.layout.maximized, nil, nil},
+    {"Firefox", is_video, laptop, hs.layout.maximized, nil, nil},
     {"Signal", nil, laptop, hs.geometry.rect(0.2, 0.15, 0.6, 0.7), nil, nil},
     {"Music", nil, laptop, hs.layout.maximized, nil, nil},
     {"Slack", nil, laptop, hs.layout.maximized, nil, nil},
