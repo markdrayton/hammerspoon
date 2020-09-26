@@ -140,13 +140,22 @@ Install:andUse("DeepLTranslate", {
   }
 })
 
--- Toggle caffeine
-Install:andUse("Caffeine", {
-  start = true,
-  hotkeys = {
-    toggle = { mash, "C" }
-  }
-})
+-- Mute when displays sleep
+local originalMuted = true
+function caffeinateCallback(eventType)
+  local device = hs.audiodevice.defaultOutputDevice()
+  if device then
+    if (eventType == hs.caffeinate.watcher.screensDidSleep) then
+      originalMuted = device:muted()
+      device:setMuted(true)
+      print("Screen sleeping, muted audio (previous mute state was " .. tostring(originalMuted) .. ")")
+    elseif (eventType == hs.caffeinate.watcher.screensDidWake) then
+      device:setMuted(originalMuted)
+      print("Screen awake, restored mute state to " .. tostring(originalMuted))
+    end
+  end
+end
+caffeinateWatcher = hs.caffeinate.watcher.new(caffeinateCallback):start()
 
 -- Automatically reload config
 function reloadConfig(files)
