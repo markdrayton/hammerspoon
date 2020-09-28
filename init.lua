@@ -114,7 +114,7 @@ hs.hotkey.bind(mash, "H", nil, function()
       end
       -- leave time to open the window
       hs.timer.doAfter(0.05, function()
-        local win = hs.window:focusedWindow()
+        local win = hs.window.focusedWindow()
         if win:screen():name() == dell then
           win:move({0.15, 0.15, 0.7, 0.7})
         else
