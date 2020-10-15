@@ -140,6 +140,14 @@ Install:andUse("DeepLTranslate", {
   }
 })
 
+-- Toggle caffeine
+Install:andUse("Caffeine", {
+  start = true,
+  hotkeys = {
+    toggle = { mash, "C" }
+  }
+})
+
 -- Mute when displays sleep
 local originalMuted = true
 function caffeinateCallback(eventType)
