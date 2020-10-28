@@ -46,8 +46,11 @@ function video(app, match)
     local comp = function(title)
       -- not not to cast to bool
       return not not (
+        -- %f[%a]: not letter followed by letter frontier pattern
+        -- %f[%A]: letter followed by not letter frontier pattern
         string.match(title, "%f[%a]YouTube%f[%A]")
         or string.match(title, "%f[%a]ITV Hub%f[%A]")
+        or string.match(title, "%f[%a]Nest%f[%A]")
       )
     end
     local wins = hs.application.get(app):visibleWindows()
