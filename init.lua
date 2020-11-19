@@ -97,6 +97,36 @@ hs.hotkey.bind(mash, "L", nil, function()
   hs.layout.apply(layouts[#screens])
 end)
 
+-- Window movement
+function set_frame(func)
+  local win = hs.window.focusedWindow()
+  local frame = win:frame()
+  local max = win:screen():frame()
+
+  func(frame, max)
+  win:setFrame(frame)
+end
+
+hs.hotkey.bind(mash, "M", function()
+  set_frame(function(f, m) f.x = m.x; f.y = m.y; f.w = m.w; f.h = m.h end)
+end)
+
+hs.hotkey.bind(mash, "Left", function()
+  set_frame(function(f, m) f.x = m.x; f.y = m.y; f.w = m.w / 2; f.h = m.h end)
+end)
+
+hs.hotkey.bind(mash, "Right", function()
+  set_frame(function(f, m) f.x = m.x + (m.w / 2); f.y = m.y; f.w = m.w / 2; f.h = m.h end)
+end)
+
+hs.hotkey.bind(mash, "Up", function()
+  set_frame(function(f, m) f.y = m.y; f.h = m.h / 2 end)
+end)
+
+hs.hotkey.bind(mash, "Down", function()
+  set_frame(function(f, m) f.y = m.y + (m.h / 2) end)
+end)
+
 -- Browser history
 hs.hotkey.bind(mash, "H", nil, function()
   local iterm = hs.application.get("iTerm2")
