@@ -75,6 +75,7 @@ local layouts = {
   [1] = { -- one screen
     {"Google Chrome", nil, laptop, hs.layout.maximized, nil, nil},
     {"Firefox", nil, laptop, hs.layout.maximized, nil, nil},
+    {"Safari", nil, laptop, hs.layout.maximized, nil, nil},
     {"iTerm2", nil, laptop, hs.layout.maximized, nil, nil},
     {"Slack", nil, laptop, hs.layout.maximized, nil, nil},
     {"zoom.us", "Zoom Meeting", laptop, hs.layout.maximized, nil, nil},
@@ -82,9 +83,11 @@ local layouts = {
   [2] = { -- two screens
     {"Google Chrome", is_not_video, dell, hs.layout.left50, nil, nil},
     {"Firefox", is_not_video, dell, hs.layout.left50, nil, nil},
-    {"iTerm2", nil, dell, hs.layout.right50, nil, nil},
+    {"Safari", is_not_video, dell, hs.layout.left50, nil, nil},
     {"Google Chrome", is_video, laptop, hs.layout.maximized, nil, nil},
     {"Firefox", is_video, laptop, hs.layout.maximized, nil, nil},
+    {"Safari", is_video, laptop, hs.layout.maximized, nil, nil},
+    {"iTerm2", nil, dell, hs.layout.right50, nil, nil},
     {"Signal", nil, laptop, hs.geometry.rect(0.2, 0.15, 0.6, 0.7), nil, nil},
     {"Music", nil, laptop, hs.layout.maximized, nil, nil},
     {"Slack", nil, laptop, hs.layout.maximized, nil, nil},
@@ -154,7 +157,7 @@ hs.hotkey.bind(mash, "H", nil, function()
           win:maximize()
         end
         hs.eventtap.keyStrokes(" unset HISTFILE\n")
-        hs.eventtap.keyStrokes("echo -ne \"\\033]0;\"Browser history\"\\007\"; fh; exit\n")
+        hs.eventtap.keyStrokes("echo -ne \"\\033]0;\"Browser history\"\\007\"; browser-history; exit\n")
       end)
     end,
     0.05
