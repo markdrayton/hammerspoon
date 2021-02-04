@@ -37,8 +37,9 @@ hs.window.animationDuration = 0
 hs.hotkey.bind(mash, "Y", nil, hs.toggleConsole)
 
 -- Window layout
-local laptop = "Color LCD"
-local dell = "DELL U2713HM"
+-- find() workaround for https://github.com/Hammerspoon/hammerspoon/issues/2663
+local laptop = hs.screen.find({x=0, y=0}) -- Color LCD
+local dell = hs.screen.find({x=1, y=0}) -- "DELL U2713HM"
 
 function video(app, match)
   local r = {}
@@ -151,7 +152,7 @@ hs.hotkey.bind(mash, "H", nil, function()
       -- leave time to open the window
       hs.timer.doAfter(0.05, function()
         local win = hs.window.focusedWindow()
-        if win:screen():name() == dell then
+        if win:screen() == dell then
           win:move({0.15, 0.15, 0.7, 0.7})
         else
           win:maximize()
