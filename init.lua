@@ -100,6 +100,21 @@ hs.hotkey.bind(mash, "L", nil, function()
   hs.layout.apply(layouts[#screens])
 end)
 
+hs.hotkey.bind(mash, "Z", nil, function()
+  local layout = {
+    {"TrainerRoad", nil, laptop, nil, hs.geometry.rect{0, 25, 960, 640}, nil},
+    {"ZwiftApp", nil, laptop, hs.geometry.rect{0.5, 0.5, 0.5, 0.5}, nil, nil},
+  }
+  for _, app in ipairs(hs.application.runningApplications()) do
+    local match = hs.fnutils.find(layout, function(win) return win[1] == app:name() end)
+    if match == nil then
+      app:hide()
+    end
+  end
+  hs.layout.apply(layout)
+  hs.application.find("TrainerRoad"):setFrontmost()
+end)
+
 -- Window movement
 function set_frame(func)
   local win = hs.window.focusedWindow()
