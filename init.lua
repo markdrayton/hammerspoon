@@ -37,7 +37,7 @@ hs.window.animationDuration = 0
 hs.hotkey.bind(mash, "Y", nil, hs.toggleConsole)
 
 -- Window layout
-local laptop = "Color LCD"
+local laptop = "Built-in Retina Display"
 local dell = "DELL U2713HM"
 
 function video(app, match)
