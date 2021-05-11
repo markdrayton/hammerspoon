@@ -51,6 +51,7 @@ function video(app, match)
         string.match(title, "%f[%a]YouTube%f[%A]")
         or string.match(title, "%f[%a]ITV Hub%f[%A]")
         or string.match(title, "%f[%a]Nest%f[%A]")
+        or string.match(title, "%f[%a]Meet%f[%A]")
       )
     end
     local wins = hs.application.get(app):visibleWindows()
