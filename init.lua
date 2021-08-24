@@ -40,6 +40,8 @@ hs.hotkey.bind(mash, "Y", nil, hs.toggleConsole)
 local laptop = "Built-in Retina Display"
 local dell = "DELL U2713HM"
 
+local split = 0.5
+
 function video(app, match)
   local r = {}
   if app then
@@ -72,6 +74,14 @@ function is_not_video(app)
   return video(app, false)
 end
 
+function split_left()
+  return hs.geometry.rect(0, 0, split, 1)
+end
+
+function split_right()
+  return hs.geometry.rect(split, 0, 1 - split, 1)
+end
+
 local layouts = {
   [1] = { -- one screen
     {"Google Chrome", nil, laptop, hs.layout.maximized, nil, nil},
@@ -82,14 +92,14 @@ local layouts = {
     {"zoom.us", "Zoom Meeting", laptop, hs.layout.maximized, nil, nil},
   },
   [2] = { -- two screens
-    {"Google Chrome", is_not_video, dell, hs.layout.left50, nil, nil},
-    {"Firefox", is_not_video, dell, hs.layout.left50, nil, nil},
-    {"Safari", is_not_video, dell, hs.layout.left50, nil, nil},
-    {"Code", nil, dell, hs.layout.left50, nil, nil},
+    {"Google Chrome", is_not_video, dell, split_left, nil, nil},
+    {"Firefox", is_not_video, dell, split_left, nil, nil},
+    {"Safari", is_not_video, dell, split_left, nil, nil},
+    {"Code", nil, dell, split_left, nil, nil},
     {"Google Chrome", is_video, laptop, hs.layout.maximized, nil, nil},
     {"Firefox", is_video, laptop, hs.layout.maximized, nil, nil},
     {"Safari", is_video, laptop, hs.layout.maximized, nil, nil},
-    {"iTerm2", nil, dell, hs.layout.right50, nil, nil},
+    {"iTerm2", nil, dell, split_right, nil, nil},
     {"Signal", nil, laptop, hs.geometry.rect(0.2, 0.15, 0.6, 0.7), nil, nil},
     {"Music", nil, laptop, hs.layout.maximized, nil, nil},
     {"Slack", nil, laptop, hs.layout.maximized, nil, nil},
@@ -97,9 +107,24 @@ local layouts = {
   }
 }
 
-hs.hotkey.bind(mash, "L", nil, function()
+function apply_layout()
   local screens = hs.screen.allScreens()
   hs.layout.apply(layouts[#screens])
+end
+
+hs.hotkey.bind(mash, "J", nil, function()
+  split = math.max(0, split - 0.05)
+  apply_layout()
+end)
+
+hs.hotkey.bind(mash, "K", nil, function()
+  split = math.min(1, split + 0.05)
+  apply_layout()
+end)
+
+hs.hotkey.bind(mash, "L", nil, function()
+  split = 0.5
+  apply_layout()
 end)
 
 hs.hotkey.bind(mash, "Z", nil, function()
