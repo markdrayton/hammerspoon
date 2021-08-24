@@ -85,6 +85,7 @@ local layouts = {
     {"Google Chrome", is_not_video, dell, hs.layout.left50, nil, nil},
     {"Firefox", is_not_video, dell, hs.layout.left50, nil, nil},
     {"Safari", is_not_video, dell, hs.layout.left50, nil, nil},
+    {"Code", nil, dell, hs.layout.left50, nil, nil},
     {"Google Chrome", is_video, laptop, hs.layout.maximized, nil, nil},
     {"Firefox", is_video, laptop, hs.layout.maximized, nil, nil},
     {"Safari", is_video, laptop, hs.layout.maximized, nil, nil},
