@@ -87,6 +87,7 @@ local layouts = {
     {"Google Chrome", nil, laptop, hs.layout.maximized, nil, nil},
     {"Firefox", nil, laptop, hs.layout.maximized, nil, nil},
     {"Safari", nil, laptop, hs.layout.maximized, nil, nil},
+    {"Code", nil, laptop, hs.layout.maximized, nil, nil},
     {"iTerm2", nil, laptop, hs.layout.maximized, nil, nil},
     {"Slack", nil, laptop, hs.layout.maximized, nil, nil},
     {"zoom.us", "Zoom Meeting", laptop, hs.layout.maximized, nil, nil},
