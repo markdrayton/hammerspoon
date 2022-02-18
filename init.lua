@@ -199,6 +199,16 @@ hs.hotkey.bind(mash, "H", nil, function()
   )
 end)
 
+-- Portuguese lessons
+hs.hotkey.bind(mash, "P", nil, function()
+  local pt_url = hs.settings.get("secrets").pt_url
+  if pt_url then
+    hs.urlevent.openURLWithBundle(pt_url, "us.zoom.xos")
+  else
+    print("No URL configured for Portuguese lessons.")
+  end
+end)
+
 -- DeepL translate
 local wm = hs.webview.windowMasks
 Install:andUse("DeepLTranslate", {
