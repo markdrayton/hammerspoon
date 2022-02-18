@@ -1,3 +1,6 @@
+local secrets = require("secrets")
+secrets.start("secrets.json")
+
 mash = {"ctrl", "alt", "cmd"}
 
 -- Logging
@@ -10,17 +13,6 @@ function walk(table)
     print(k, v)
   end
 end
-
--- Local config variables
-function localconfig()
-  local f, err = loadfile("config.lua")
-  if err then
-    print("-- No config.lua found.")
-  else
-    f()
-  end
-end
-localconfig()
 
 -- Spoons
 hs.loadSpoon("SpoonInstall")
