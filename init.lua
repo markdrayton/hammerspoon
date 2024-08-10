@@ -85,8 +85,6 @@ function apply_layout()
       {"Safari", nil, laptop, hs.layout.maximized, nil, nil},
       {"Code", nil, laptop, hs.layout.maximized, nil, nil},
       {"iTerm2", nil, laptop, hs.layout.maximized, nil, nil},
-      {"Slack", nil, laptop, hs.layout.maximized, nil, nil},
-      {"zoom.us", "Zoom Meeting", laptop, hs.layout.maximized, nil, nil},
     },
     [2] = { -- two screens
       {"Google Chrome", is_not_video, dell, maximized and hs.layout.maximized or split_left, nil, nil},
@@ -98,9 +96,6 @@ function apply_layout()
       {"Safari", is_video, laptop, hs.layout.maximized, nil, nil},
       {"iTerm2", nil, dell, maximized and hs.layout.maximized or split_right, nil, nil},
       {"Signal", nil, laptop, hs.geometry.rect(0.2, 0.15, 0.6, 0.7), nil, nil},
-      {"Music", nil, laptop, hs.layout.maximized, nil, nil},
-      {"Slack", nil, laptop, hs.layout.maximized, nil, nil},
-      {"zoom.us", "Zoom Meeting", laptop, hs.layout.maximized, nil, nil},
     }
   }
   local screens = hs.screen.allScreens()
