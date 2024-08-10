@@ -81,21 +81,21 @@ function apply_layout()
   local layouts = {
     [1] = { -- one screen
       {"Google Chrome", nil, laptop, hs.layout.maximized, nil, nil},
-      {"Firefox", nil, laptop, hs.layout.maximized, nil, nil},
-      {"Safari", nil, laptop, hs.layout.maximized, nil, nil},
-      {"Code", nil, laptop, hs.layout.maximized, nil, nil},
+      -- {"Firefox", nil, laptop, hs.layout.maximized, nil, nil},
+      -- {"Safari", nil, laptop, hs.layout.maximized, nil, nil},
+      -- {"Code", nil, laptop, hs.layout.maximized, nil, nil},
       {"iTerm2", nil, laptop, hs.layout.maximized, nil, nil},
     },
     [2] = { -- two screens
       {"Google Chrome", is_not_video, dell, maximized and hs.layout.maximized or split_left, nil, nil},
       {"Google Chrome", is_video, laptop, hs.layout.maximized, nil, nil},
-      {"Firefox", is_not_video, dell, maximized and hs.layout.maximized or split_left, nil, nil},
-      {"Firefox", is_video, laptop, hs.layout.maximized, nil, nil},
-      {"Safari", is_not_video, dell, maximized and hs.layout.maximized or split_left, nil, nil},
-      {"Safari", is_video, laptop, hs.layout.maximized, nil, nil},
-      {"Code", nil, dell, maximized and hs.layout.maximized or split_right, nil, nil},
+      -- {"Firefox", is_not_video, dell, maximized and hs.layout.maximized or split_left, nil, nil},
+      -- {"Firefox", is_video, laptop, hs.layout.maximized, nil, nil},
+      -- {"Safari", is_not_video, dell, maximized and hs.layout.maximized or split_left, nil, nil},
+      -- {"Safari", is_video, laptop, hs.layout.maximized, nil, nil},
+      {"Code", nil, dell, maximized and hs.layout.maximized or split_left, nil, nil},
       {"iTerm2", nil, dell, maximized and hs.layout.maximized or split_right, nil, nil},
-      {"Signal", nil, laptop, hs.geometry.rect(0.2, 0.15, 0.6, 0.7), nil, nil},
+      -- {"Signal", nil, laptop, hs.geometry.rect(0.2, 0.15, 0.6, 0.7), nil, nil},
     }
   }
   local screens = hs.screen.allScreens()
