@@ -122,19 +122,6 @@ hs.hotkey.bind(mash, "L", nil, function()
   apply_layout()
 end)
 
-hs.hotkey.bind(mash, "Z", nil, function()
-  local layout = {
-    {"TrainerRoad", nil, laptop, nil, hs.geometry.rect{0, 25, 960, 640}, nil},
-    {"ZwiftApp", nil, laptop, hs.geometry.rect{0.5, 0.5, 0.5, 0.5}, nil, nil},
-  }
-  for _, app in ipairs(hs.application.runningApplications()) do
-    local match = hs.fnutils.find(layout, function(win) return win[1] == app:name() end)
-    if match == nil then
-      app:hide()
-    end
-  end
-  hs.layout.apply(layout)
-  hs.application.find("TrainerRoad"):setFrontmost()
 end)
 
 -- Window movement
@@ -199,16 +186,6 @@ hs.hotkey.bind(mash, "H", nil, function()
     end,
     0.05
   )
-end)
-
--- Portuguese lessons
-hs.hotkey.bind(mash, "P", nil, function()
-  local pt_url = hs.settings.get("secrets").pt_url
-  if pt_url then
-    hs.urlevent.openURLWithBundle(pt_url, "us.zoom.xos")
-  else
-    print("No URL configured for Portuguese lessons.")
-  end
 end)
 
 -- DeepL translate
