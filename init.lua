@@ -29,11 +29,14 @@ hs.window.animationDuration = 0
 hs.hotkey.bind(mash, "Y", nil, hs.toggleConsole)
 
 -- Window layout
-local laptop = "Built-in Retina Display"
-local dell = "DELL U2713HM"
+local retina = "Built-in Retina Display"
 
 local split = 0.5
 local maximized = false
+
+function external()
+  return hs.screen.allScreens()[2]
+end
 
 function video(app, match)
   local r = {}
@@ -80,22 +83,22 @@ end
 function apply_layout()
   local layouts = {
     [1] = { -- one screen
-      {"Google Chrome", nil, laptop, hs.layout.maximized, nil, nil},
-      -- {"Firefox", nil, laptop, hs.layout.maximized, nil, nil},
-      -- {"Safari", nil, laptop, hs.layout.maximized, nil, nil},
-      -- {"Code", nil, laptop, hs.layout.maximized, nil, nil},
-      {"iTerm2", nil, laptop, hs.layout.maximized, nil, nil},
+      {"Google Chrome", nil, retina, hs.layout.maximized, nil, nil},
+      -- {"Firefox", nil, retina, hs.layout.maximized, nil, nil},
+      -- {"Safari", nil, retina, hs.layout.maximized, nil, nil},
+      -- {"Code", nil, retina, hs.layout.maximized, nil, nil},
+      {"iTerm2", nil, retina, hs.layout.maximized, nil, nil},
     },
     [2] = { -- two screens
-      {"Google Chrome", is_not_video, dell, maximized and hs.layout.maximized or split_left, nil, nil},
-      {"Google Chrome", is_video, laptop, hs.layout.maximized, nil, nil},
-      -- {"Firefox", is_not_video, dell, maximized and hs.layout.maximized or split_left, nil, nil},
-      -- {"Firefox", is_video, laptop, hs.layout.maximized, nil, nil},
-      -- {"Safari", is_not_video, dell, maximized and hs.layout.maximized or split_left, nil, nil},
-      -- {"Safari", is_video, laptop, hs.layout.maximized, nil, nil},
-      {"Code", nil, dell, maximized and hs.layout.maximized or split_left, nil, nil},
-      {"iTerm2", nil, dell, maximized and hs.layout.maximized or split_right, nil, nil},
-      -- {"Signal", nil, laptop, hs.geometry.rect(0.2, 0.15, 0.6, 0.7), nil, nil},
+      {"Google Chrome", is_not_video, external, maximized and hs.layout.maximized or split_left, nil, nil},
+      {"Google Chrome", is_video, retina, hs.layout.maximized, nil, nil},
+      -- {"Firefox", is_not_video, external, maximized and hs.layout.maximized or split_left, nil, nil},
+      -- {"Firefox", is_video, retina, hs.layout.maximized, nil, nil},
+      -- {"Safari", is_not_video, external, maximized and hs.layout.maximized or split_left, nil, nil},
+      -- {"Safari", is_video, retina, hs.layout.maximized, nil, nil},
+      {"Code", nil, external, maximized and hs.layout.maximized or split_left, nil, nil},
+      {"iTerm2", nil, external, maximized and hs.layout.maximized or split_right, nil, nil},
+      -- {"Signal", nil, retina, hs.geometry.rect(0.2, 0.15, 0.6, 0.7), nil, nil},
     }
   }
   local screens = hs.screen.allScreens()
@@ -173,7 +176,7 @@ hs.hotkey.bind(mash, "H", nil, function()
       -- leave time to open the window
       hs.timer.doAfter(0.05, function()
         local win = hs.window.focusedWindow()
-        if win:screen():name() == dell then
+        if win:screen():name() ~= retina then
           win:move({0.15, 0.15, 0.7, 0.7})
         else
           win:maximize()
